@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: my-pod
+  name: my-pod
+  namespace: default
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  - name: java
+    image: lizhenliang/java-demo:latest
+

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: java-demo
+  name: java-demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: java-demo
+  template:
+    metadata:
+      labels:
+        app: java-demo
+    spec:
+      containers:
+      - image: lizhenliang/java-demo
+        name: java-demo

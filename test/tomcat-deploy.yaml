@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-test
+  labels:
+    app: tomcat-test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tomcat-test
+  template:
+    metadata:
+      labels:
+        app: tomcat-test
+    spec:
+      containers:
+      - name: tomcat-con
+        image: registry.daoxila.com/d8283/tomcat:v3.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: /usr/local/tomcat/webapps/ROOT
+          name: rootdir  
+      imagePullSecrets:
+      - name: daoxila
+      volumes:
+      - name: rootdir
+        nfs:
+          server: 192.168.19.135
+          path: /pub/mnt/tomcat/ROOT

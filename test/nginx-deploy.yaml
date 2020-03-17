@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-test
+  labels:
+    app: nginx-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-test
+  template:
+    metadata:
+      labels:
+        app: nginx-test
+    spec:
+      containers:
+      - name: nginx-con
+        image: registry.daoxila.com/d8283/nginx:v1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: rootdir
+          mountPath: /usr/local/server/nginx/html
+        - name: rootdir
+          mountPath: /usr/local/server/nginx/conf
+          subPath: conf
+      imagePullSecrets:
+      - name: daoxila
+      volumes:
+      - name: rootdir
+        persistentVolumeClaim:
+          claimName: nfs-pvc

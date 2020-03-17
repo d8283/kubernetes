@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress-rules
+spec:
+  rules:
+  - host: nginx.myweb.com
+    http:
+      paths:
+      - path:
+        backend:
+          serviceName: nginx-test
+          servicePort: 80
+  - host: tomcat.myweb.com
+    http:
+      paths:
+      - path:
+        backend:
+          serviceName: java-demo
+          servicePort: 80

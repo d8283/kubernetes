@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: java-demo
+  name: java-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-demo
+  template:
+    metadata:
+      labels:
+        app: java-demo
+    spec:
+      containers:
+      - image: lizhenliang/java-demo
+        imagePullPolicy: Always
+        name: java-demo
+      imagePullSecrets:
+      - name: daoxila
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: java-demo
+  name: java-demo
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: java-demo

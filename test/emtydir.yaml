@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod2
+spec:
+  containers:
+  - name: write
+    image: centos
+    command: ["bash","-c","while true;do echo $(date +%F\" \"%T) >> /pub1/ceshi; sleep 3;done"]
+    volumeMounts:
+    - name: data
+      mountPath: /pub1
+  - name: read
+    image: centos
+    command: ["bash","-c","tail -f /pub1/ceshi"]
+    volumeMounts:
+    - name: data
+      mountPath: /pub1
+  volumes:
+  - name: data
+    emptyDir: {}
