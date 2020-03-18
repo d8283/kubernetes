@@ -2,7 +2,14 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: nginx-ingress-rules
+  annotations:
+    kubernets.io/ingress.class: "nginx"
 spec:
+  tls:
+  - hosts:
+    - nginx.myweb.com
+    - tomcat.myweb.com
+    secretName: tls-myweb
   rules:
   - host: nginx.myweb.com
     http:
