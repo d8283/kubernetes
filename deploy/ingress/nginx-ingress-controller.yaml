@@ -215,7 +215,7 @@ spec:
       hostNetwork: true
       serviceAccountName: nginx-ingress-serviceaccount
       nodeSelector:
-        lb: nic
+        lb: abc
       imagePullSecrets:
       - name: registry-aliyun
       containers:
