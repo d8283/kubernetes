@@ -1,0 +1,11 @@
+KUBELET_ARGS="\
+      --hostname-override=19-148 \
+      --config=/etc/kubernetes/config/kubelet.yaml \
+      --pod-infra-container-image=gcr.azk8s.cn/google-containers/pause-amd64:3.1 \
+      --bootstrap-kubeconfig=/etc/kubernetes/config/bootstrap.kubeconfig \
+      --kubeconfig=/etc/kubernetes/config/kubelet.kubeconfig  \
+      --cert-dir=/etc/kubernetes/ssl \
+      --root-dir=/pub/data/kubelet \
+      --network-plugin=cni \
+      --logtostderr=true \
+      --v=4"

@@ -1,10 +1,10 @@
-#apiVersion: v1
-#kind: Namespace
-#metadata:
-#  name: ingress-nginx
-#  labels:
-#    app.kubernetes.io/name: ingress-nginx
-#    app.kubernetes.io/part-of: ingress-nginx
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ingress-nginx
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
 
 ---
 
@@ -215,12 +215,13 @@ spec:
       hostNetwork: true
       serviceAccountName: nginx-ingress-serviceaccount
       nodeSelector:
-        lb: abc
-      imagePullSecrets:
-      - name: registry-aliyun
+        #lb: nic
+        kubernetes.io/os: linux
+      #imagePullSecrets:
+      #- name: registry-aliyun
       containers:
         - name: nginx-ingress-controller
-          image: registry.cn-hangzhou.aliyuncs.com/d8283/nginx-ingress-controller:0.30.0
+          image: quay.azk8s.cn/kubernetes-ingress-controller/nginx-ingress-controller:0.30.0
           args:
             - /nginx-ingress-controller
             - --configmap=$(POD_NAMESPACE)/nginx-configuration

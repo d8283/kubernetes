@@ -24,7 +24,7 @@ spec:
         - name: rootdir
           mountPath: /usr/local/server/nginx/html
       imagePullSecrets:
-      - name: daoxila
+      - name: registry-harbor
       volumes:
       - name: rootdir
         persistentVolumeClaim:

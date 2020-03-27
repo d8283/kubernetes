@@ -1,0 +1,44 @@
+# kube-apiserver arguments config
+
+KUBE_API_ARGS="\
+      --allow-privileged=true      \
+      --secure-port=6443           \
+      --insecure-port=0            \
+      --bind-address=192.168.19.147 \
+      --etcd-cafile=/etc/kubernetes/ssl/ca.crt                       \
+      --etcd-certfile=/etc/kubernetes/ssl/kube-api-client.crt                   \
+      --etcd-keyfile=/etc/kubernetes/ssl/kube-api-client.key                    \
+      --etcd-servers=https://192.168.19.147:2379,https://192.168.19.148:2379,https://192.168.19.149:2379 \
+      --tls-cert-file=/etc/kubernetes/ssl/kube-api-server.crt              \
+      --tls-private-key-file=/etc/kubernetes/ssl/kube-api-server.key       \
+      --client-ca-file=/etc/kubernetes/ssl/ca.crt                    \
+      --service-account-key-file=/etc/kubernetes/ssl/ca.crt   \
+      --kubelet-certificate-authority=/etc/kubernetes/ssl/ca.crt     \
+      --kubelet-client-certificate=/etc/kubernetes/ssl/kube-api-client.crt \
+      --kubelet-client-key=/etc/kubernetes/ssl/kube-api-client.key         \
+      --authorization-mode=RBAC,Node   \
+      --kubelet-https=true             \
+      --anonymous-auth=false           \
+      --apiserver-count=3              \
+      --audit-log-maxage=30            \
+      --audit-log-maxbackup=7          \
+      --audit-log-maxsize=100          \
+      --event-ttl=1h                   \
+      --enable-bootstrap-token-auth    \
+      --max-requests-inflight=3000     \
+      --delete-collection-workers=3    \
+      --service-cluster-ip-range=172.25.0.0/16       \
+      --service-node-port-range=30000-35000        \
+      --proxy-client-cert-file=/etc/kubernetes/ssl/metrics-proxy.crt \
+      --proxy-client-key-file=/etc/kubernetes/ssl/metrics-proxy.key \
+      --requestheader-allowed-names="aggregator" \
+      --requestheader-client-ca-file=/etc/kubernetes/ssl/ca.crt \
+      --requestheader-extra-headers-prefix="X-Remote-Extra-" \
+      --requestheader-group-headers=X-Remote-Group \
+      --requestheader-username-headers=X-Remote-User \
+      --enable-aggregator-routing=true \
+      --default-not-ready-toleration-seconds=10    \
+      --default-unreachable-toleration-seconds=10  \
+      --enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota,NodeRestriction \
+      --logtostderr=true               \
+      --v=4"
