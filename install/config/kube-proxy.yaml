@@ -16,7 +16,7 @@ conntrack:
   tcpEstablishedTimeout: 24h0m0s
 enableProfiling: false
 healthzBindAddress: 0.0.0.0:10256
-hostnameOverride: "19-148"
+hostnameOverride: "19-147"
 iptables:
   masqueradeAll: false
   masqueradeBit: 14
