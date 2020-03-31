@@ -9,7 +9,6 @@ spec:
   - hosts:
     - nginx.myweb.com
     - tomcat.myweb.com
-    - dashboard.myweb.com
     secretName: tls-myweb
   rules:
   - host: nginx.myweb.com
@@ -26,10 +25,3 @@ spec:
         backend:
           serviceName: java-demo
           servicePort: 80
-  - host: dashboard.myweb.com
-    http:
-      paths:
-      - path:
-        backend:
-          serviceName: kubernetes-dashboard
-          servicePort: 443
