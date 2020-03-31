@@ -20,7 +20,7 @@ readOnlyPort: 0
 port: 10250
 clusterDomain: "cluster.local"
 clusterDNS:
-- "172.25.0.2"
+  - "172.23.0.2"
 configMapAndSecretChangeDetectionStrategy: Watch
 containerLogMaxFiles: 5
 containerLogMaxSize: 10Mi

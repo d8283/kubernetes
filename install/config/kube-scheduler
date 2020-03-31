@@ -1,10 +1,8 @@
-# kube-scheduler args config
-
 KUBE_SCHEDULER_ARGS="\
-      --address=127.0.0.1 \
-      --leader-elect=true \
-      --logtostderr=true \
-      --v=4 \
-      --kubeconfig=/etc/kubernetes/config/kube-scheduler.kubeconfig \
-      --authorization-kubeconfig=/etc/kubernetes/config/kube-scheduler.kubeconfig \
-      --authentication-kubeconfig=/etc/kubernetes/config/kube-scheduler.kubeconfig"
+    --bind-address=127.0.0.1 \
+    --kubeconfig=/etc/kubernetes/config/kube-scheduler.kubeconfig \
+    --authorization-kubeconfig=/etc/kubernetes/config/kube-scheduler.kubeconfig \
+    --authentication-kubeconfig=/etc/kubernetes/config/kube-scheduler.kubeconfig \
+    --leader-elect=true \
+    --logtostderr=true \
+    --v=4"

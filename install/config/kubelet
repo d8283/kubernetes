@@ -1,5 +1,5 @@
 KUBELET_ARGS="\
-    --hostname-override=19-147 \
+    --hostname-override=19-155 \
     --config=/etc/kubernetes/config/kubelet.yaml \
     --cgroup-driver=systemd \
     --pod-infra-container-image=gcr.azk8s.cn/google-containers/pause-amd64:3.1 \
