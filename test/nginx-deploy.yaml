@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: nginx-con
-        image: registry.daoxila.com/d8283/nginx:v1.0
-        imagePullPolicy: Always
+        image: registry.cn-hangzhou.aliyuncs.com/d8283/nginx:v1.0
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
         volumeMounts:
@@ -27,7 +27,7 @@ spec:
           mountPath: /usr/local/server/nginx/conf
           subPath: conf
       imagePullSecrets:
-      - name: registry-harbor
+      - name: registry-aliyun
       volumes:
       - name: rootdir
         persistentVolumeClaim:

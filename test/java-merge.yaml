@@ -16,10 +16,10 @@ spec:
     spec:
       containers:
       - image: lizhenliang/java-demo
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: java-demo
-      imagePullSecrets:
-      - name: daoxila
+      #imagePullSecrets:
+      #- name: registry-harbor
 ---
 apiVersion: v1
 kind: Service
