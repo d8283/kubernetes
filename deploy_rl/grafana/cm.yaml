@@ -1,0 +1,366 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: grafana-configs
+
+data:
+  grafana.ini: |
+    app_mode = production
+    instance_name = ${HOSTNAME}
+
+    [paths]
+    data = data
+    temp_data_lifetime = 24h
+    logs = data/log
+    plugins = /var/lib/grafana/plugins
+    provisioning = /var/lib/grafana/provisioning
+
+    [server]
+    protocol = http
+    http_addr =
+    http_port = 3000
+    domain = localhost
+    enforce_domain = false
+    root_url = %(protocol)s://%(domain)s:%(http_port)s/
+    router_logging = false
+    static_root_path = public
+    enable_gzip = false
+    cert_file =
+    cert_key =
+    socket = /tmp/grafana.sock
+
+    [database]
+    type = sqlite3
+    host = 127.0.0.1:3306
+    name = grafana
+    user = root
+    password =
+    url =
+    max_idle_conn = 2
+    max_open_conn =
+    conn_max_lifetime = 14400
+    log_queries =
+    ssl_mode = disable
+
+    ca_cert_path =
+    client_key_path =
+    client_cert_path =
+    server_cert_name =
+    path = grafana.db
+    cache_mode = private
+
+    [session]
+    provider = file
+    provider_config = sessions
+    cookie_name = grafana_sess
+    cookie_secure = false
+    session_life_time = 86400
+    gc_interval_time = 86400
+    conn_max_lifetime = 14400
+
+    [dataproxy]
+    logging = false
+    timeout = 30
+
+    [analytics]
+    reporting_enabled = true
+    check_for_updates = true
+    google_analytics_ua_id =
+    google_tag_manager_id =
+
+    [security]
+    admin_user = admin
+    admin_password = admin
+    secret_key = SW2YcwTIb9zpOOhoPsMm
+    disable_gravatar = false
+    data_source_proxy_whitelist =
+    disable_brute_force_login_protection = false
+    cookie_secure = true
+    cookie_samesite = lax
+
+    [snapshots]
+    external_enabled = true
+    external_snapshot_url = https://snapshots-origin.raintank.io
+    external_snapshot_name = Publish to snapshot.raintank.io
+    snapshot_remove_expired = true
+
+    [dashboards]
+    versions_to_keep = 20
+
+    [users]
+    allow_sign_up = false
+    allow_org_create = false
+    auto_assign_org = true
+    auto_assign_org_id = 1
+    auto_assign_org_role = Viewer
+    verify_email_enabled = false
+    login_hint = email or username
+    default_theme = dark
+    external_manage_link_url =
+    external_manage_link_name =
+    external_manage_info =
+    viewers_can_edit = false
+
+    [auth]
+    login_cookie_name = grafana_session
+    login_maximum_inactive_lifetime_days = 7
+    login_maximum_lifetime_days = 30
+    token_rotation_interval_minutes = 10
+    disable_login_form = false
+    disable_signout_menu = false
+    signout_redirect_url =
+    oauth_auto_login = false
+
+    [auth.anonymous]
+    enabled = false
+    org_name = Main Org.
+    org_role = Viewer
+
+    [auth.github]
+    enabled = false
+    allow_sign_up = true
+    client_id = some_id
+    client_secret = some_secret
+    scopes = user:email,read:org
+    auth_url = https://github.com/login/oauth/authorize
+    token_url = https://github.com/login/oauth/access_token
+    api_url = https://api.github.com/user
+    team_ids =
+    allowed_organizations =
+
+    [auth.gitlab]
+    enabled = false
+    allow_sign_up = true
+    client_id = some_id
+    client_secret = some_secret
+    scopes = api
+    auth_url = https://gitlab.com/oauth/authorize
+    token_url = https://gitlab.com/oauth/token
+    api_url = https://gitlab.com/api/v4
+    allowed_groups =
+
+    [auth.google]
+    enabled = false
+    allow_sign_up = true
+    client_id = some_client_id
+    client_secret = some_client_secret
+    scopes = https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
+    auth_url = https://accounts.google.com/o/oauth2/auth
+    token_url = https://accounts.google.com/o/oauth2/token
+    api_url = https://www.googleapis.com/oauth2/v1/userinfo
+    allowed_domains =
+    hosted_domain =
+
+    [auth.grafananet]
+    enabled = false
+    allow_sign_up = true
+    client_id = some_id
+    client_secret = some_secret
+    scopes = user:email
+    allowed_organizations =
+
+    [auth.grafana_com]
+    enabled = false
+    allow_sign_up = true
+    client_id = some_id
+    client_secret = some_secret
+    scopes = user:email
+    allowed_organizations =
+
+    [auth.generic_oauth]
+    name = OAuth
+    enabled = false
+    allow_sign_up = true
+    client_id = some_id
+    client_secret = some_secret
+    scopes = user:email
+    email_attribute_name = email:primary
+    auth_url =
+    token_url =
+    api_url =
+    team_ids =
+    allowed_organizations =
+    tls_skip_verify_insecure = false
+    tls_client_cert =
+    tls_client_key =
+    tls_client_ca =
+    send_client_credentials_via_post = false
+
+    [auth.basic]
+    enabled = true
+
+    [auth.proxy]
+    enabled = false
+    header_name = X-WEBAUTH-USER
+    header_property = username
+    auto_sign_up = true
+    ldap_sync_ttl = 60
+    whitelist =
+    headers =
+
+    [auth.ldap]
+    enabled = false
+    config_file = /etc/grafana/ldap.toml
+    allow_sign_up = true
+
+    [smtp]
+    enabled = false
+    host = localhost:25
+    user =
+    password =
+    cert_file =
+    key_file =
+    skip_verify = false
+    from_address = admin@grafana.localhost
+    from_name = Grafana
+    ehlo_identity =
+
+    [emails]
+    welcome_email_on_sign_up = false
+    templates_pattern = emails/*.html
+
+    [log]
+    mode = console file
+    level = info
+    filters = ldap:debug
+
+    [log.console]
+    level =
+    format = console
+
+    [log.file]
+    level =
+    format = text
+    log_rotate = true
+    max_lines = 1000000
+    max_size_shift = 28
+    daily_rotate = true
+    max_days = 7
+
+    [log.syslog]
+    level =
+    format = text
+    network =
+    address =
+    facility =
+    tag =
+
+    [quota]
+    enabled = false
+    org_user = 10
+    org_dashboard = 100
+    org_data_source = 10
+    org_api_key = 10
+    user_org = 10
+    global_user = -1
+    global_org = -1
+    global_dashboard = -1
+    global_api_key = -1
+    global_session = -1
+
+    [alerting]
+    enabled = true
+    execute_alerts = true
+    error_or_timeout = alerting
+    nodata_or_nullvalues = no_data
+    concurrent_render_limit = 5
+
+    [explore]
+    enabled = true
+
+    [metrics]
+    enabled           = true
+    interval_seconds  = 10
+    basic_auth_username =
+    basic_auth_password =
+
+    [metrics.graphite]
+    address =
+    prefix = prod.grafana.%(instance_name)s.
+
+    [grafana_net]
+    url = https://grafana.com
+
+    [grafana_com]
+    url = https://grafana.com
+
+    [tracing.jaeger]
+    address =
+    always_included_tag =
+    sampler_type = const
+    sampler_param = 1
+
+    [external_image_storage]
+    provider =
+
+    [external_image_storage.s3]
+    bucket_url =
+    bucket =
+    region =
+    path =
+    access_key =
+    secret_key =
+
+    [external_image_storage.webdav]
+    url =
+    username =
+    password =
+    public_url =
+
+    [external_image_storage.gcs]
+    key_file =
+    bucket =
+    path =
+
+    [external_image_storage.azure_blob]
+    account_name =
+    account_key =
+    container_name =
+
+    [external_image_storage.local]
+
+    [rendering]
+    server_url =
+    callback_url =
+
+    [panels]
+    enable_alpha = false
+    disable_sanitize_html = false
+
+    [enterprise]
+    license_path =
+
+  ldap.toml: |
+    [[servers]]
+    host = "ldaps.rulin.me"
+    port = 636
+    use_ssl = true
+    start_tls = false
+    ssl_skip_verify = true
+    bind_dn = "cn=auth-user,ou=People,dc=ldaps,dc=rulin,dc=me"
+    bind_password = 'JzKvC2dwsx2CS2s3k'
+    search_filter = "(cn=%s)"
+    search_base_dns = ["ou=People,dc=ldaps,dc=rulin,dc=me"]
+
+    group_search_filter = "(&(objectClass=posixGroup)(memberUid=%s))"
+    group_search_base_dns = ["ou=Group,dc=ldaps,dc=rulin,dc=me"]
+
+    [servers.attributes]
+    name = "givenName"
+    surname = "sn"
+    username = "cn"
+    member_of = "cn"
+    email =  "email"
+
+    [[servers.group_mappings]]
+    group_dn = "cn=grafana-admins,ou=Group,dc=ldaps,dc=rulin,dc=me"
+    org_role = "Admin"
+
+    [[servers.group_mappings]]
+    group_dn = "cn=grafana-editors,ou=Group,dc=ldaps,dc=rulin,dc=me"
+    org_role = "Editor"
+
+    [[servers.group_mappings]]
+    group_dn = "cn=grafana-viewers,ou=Group,dc=ldaps,dc=rulin,dc=me"
+    org_role = "Viewer"

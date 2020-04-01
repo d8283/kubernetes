@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: grafana
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role
+                operator: In
+                values:
+                - common
+      initContainers:
+      - name: pre-data
+        image: registry.rulin.me/os/alpine:3.11
+        command: ["chown", "-R", "472:104", "/var/lib/grafana"]
+        volumeMounts:
+        - mountPath: /var/lib/grafana
+          name: data
+      containers:
+      - name: grafana
+        image: registry.rulin.me/monitoring/grafana:6.6.2
+        imagePullPolicy: Always
+        volumeMounts:
+        - mountPath: /var/lib/grafana
+          name: data
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 2
+            memory: "4G"
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+        livenessProbe:
+          httpGet:
+            port: 3000
+            path: /
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            port: 3000
+            path: /
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+          periodSeconds: 20
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: data-grafana
+      - name: gconfigs
+        configMap:
+          name: grafana-configs
