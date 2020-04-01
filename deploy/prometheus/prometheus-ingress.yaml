@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: prometheus-ingress
+  namespace: kube-system
+  annotations:
+    kubernets.io/ingress.class: "nginx"
+spec:
+  tls:
+  - hosts:
+    - prometheus.myweb.com
+    secretName: tls-myweb
+  rules:
+  - host: prometheus.myweb.com
+    http:
+      paths:
+      - path:
+        backend:
+          serviceName: prometheus
+          servicePort: 9090
