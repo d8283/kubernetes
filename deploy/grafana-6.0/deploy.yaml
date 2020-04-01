@@ -14,25 +14,25 @@ spec:
       labels:
         app: grafana
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: role
-                operator: In
-                values:
-                - common
+#      affinity:
+#        nodeAffinity:
+#          requiredDuringSchedulingIgnoredDuringExecution:
+#            nodeSelectorTerms:
+#            - matchExpressions:
+#              - key: role
+#                operator: In
+#                values:
+#                - common
       initContainers:
       - name: pre-data
-        image: registry.rulin.me/os/alpine:3.11
+        image: alpine:3.11
         command: ["chown", "-R", "472:104", "/var/lib/grafana"]
         volumeMounts:
         - mountPath: /var/lib/grafana
           name: data
       containers:
       - name: grafana
-        image: registry.rulin.me/monitoring/grafana:6.6.2
+        image: grafana/grafana:6.6.2
         imagePullPolicy: Always
         volumeMounts:
         - mountPath: /var/lib/grafana
@@ -42,10 +42,10 @@ spec:
         resources:
           limits:
             cpu: 2
-            memory: "4G"
+            memory: "1G"
           requests:
             cpu: "500m"
-            memory: "1Gi"
+            memory: "500Mi"
         livenessProbe:
           httpGet:
             port: 3000
@@ -63,7 +63,7 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: data-grafana
+          claimName: data-grafana-pvc
       - name: gconfigs
         configMap:
           name: grafana-configs
