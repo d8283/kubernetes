@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ceph-grafana-pv
+  labels:
+    name: ceph-grafana-pv 
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  rbd:
+    monitors:       
+      - 192.168.19.134:6789
+      - 192.168.19.147:6789
+      - 192.168.19.148:6789
+    pool: kube 
+    image: ceph-grafana-image         
+    user: admin
+    secretRef:
+      name: ceph-admin-secret
+    fsType: xfs
+    readOnly: false
+  persistentVolumeReclaimPolicy: Retain
+

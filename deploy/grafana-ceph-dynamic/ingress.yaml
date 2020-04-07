@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+   name: grafana
+spec:
+  tls:
+  - hosts:
+    - prometheus.myweb.com
+    secretName: tls-myweb
+  rules:
+  - host: grafana.myweb.com
+    http:
+      paths:
+      - path: /
+        backend:
+         serviceName: grafana
+         servicePort: 3000

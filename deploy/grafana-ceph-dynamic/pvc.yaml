@@ -1,12 +1,13 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: data-grafana-pvc
+  name: ceph-grafana-pvc
   namespace: default
+  annotations:
+    volume.beta.kubernetes.io/storage-class: ceph-rbd
 spec:
-  storageClassName: data-grafana
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 5Gi

@@ -23,6 +23,8 @@ spec:
 #                operator: In
 #                values:
 #                - common
+#      nodeSelector:
+#        tag: grafana
       initContainers:
       - name: pre-data
         image: alpine:3.11
@@ -63,7 +65,7 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: data-grafana-pvc
+          claimName: ceph-grafana-pvc
       - name: gconfigs
         configMap:
           name: grafana-configs

@@ -1,0 +1,3 @@
+#部署前先确保远程存储服务ceph集群已经安装好，然后kubernetes集群里基于ceph rbd的storageclass也已经部署好。
+
+#因为使用storageclass动态创建的pv，所以删除grafana应用时不要删除grafana的pvc.yaml
