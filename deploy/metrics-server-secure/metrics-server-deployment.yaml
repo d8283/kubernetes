@@ -29,7 +29,7 @@ spec:
           secretName: metrics-server-certs
       containers:
       - name: metrics-server
-        image: gcr.azk8s.cn/google-containers/metrics-server-amd64:v0.3.6
+        image: registry.cn-hangzhou.aliyuncs.com/d8283/metrics-server-amd64:v0.3.6
         args:
           - --secure-port=4443
           - --metric-resolution=30s

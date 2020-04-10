@@ -1,0 +1,1 @@
+#该项目在部署时，pod不断restart，无法判断是其他配置问题还是resource配置cpu或memory太小而导致。等正式环境再测试。

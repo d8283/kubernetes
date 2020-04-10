@@ -221,7 +221,7 @@ spec:
       #- name: registry-aliyun
       containers:
         - name: nginx-ingress-controller
-          image: quay.azk8s.cn/kubernetes-ingress-controller/nginx-ingress-controller:0.30.0
+          image: registry.cn-hangzhou.aliyuncs.com/d8283/nginx-ingress-controller:0.30.0
           args:
             - /nginx-ingress-controller
             - --configmap=$(POD_NAMESPACE)/nginx-configuration

@@ -4,4 +4,6 @@
 
 #删除应用时不能使用kubectl delete -f .来整体删除，因为StatefulSet属性不像PersistentVolumeClaim属性能删除pvc，pvc不删除就导致pv也不能删除，会一直卡在哪里。
 
+所以statefulset不要使用静态pv
+
 #所以要先删除prometheus的pvc，kubectl delete pvc prometheus-data-prometheus-0 -n kube-system
