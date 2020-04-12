@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ceph-mysql-pvc
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      name: ceph-mysql-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: "2Gi"

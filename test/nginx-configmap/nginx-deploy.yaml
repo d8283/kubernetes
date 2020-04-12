@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-test
+  labels:
+    app: nginx-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-test
+  template:
+    metadata:
+      labels:
+        app: nginx-test
+    spec:
+      containers:
+      - name: nginx-con
+        image: registry.cn-hangzhou.aliyuncs.com/d8283/nginx:v1.0
+        imagePullPolicy: IfNotPresent
+        command: ["nginx", "-c", "conf.d/nginx.conf", "-g","daemon off;"]
+        env:
+        - name:  "ENV_PATH"
+          value: "/www/daoxila/library/Env.php"
+        - name:  "ENV_NAME"
+          value: "xyluck"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: rootdir
+          mountPath: /usr/local/server/nginx/html
+        #- name: nginx-config
+        #  mountPath: /usr/local/server/nginx/conf/nginx.conf
+        #  subPath: nginx.conf
+        - name: nginx-config
+          mountPath: /usr/local/server/nginx/conf.d
+      imagePullSecrets:
+      - name: registry-aliyun
+      volumes:
+      - name: rootdir
+        persistentVolumeClaim:
+          claimName: nfs-pvc
+      - name: nginx-config
+        configMap:
+          name: nginx-configmap
+          items:
+          - key: nginx.conf
+            path: nginx.conf
