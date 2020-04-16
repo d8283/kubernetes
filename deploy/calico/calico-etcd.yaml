@@ -328,7 +328,7 @@ spec:
             - name: CALICO_IPV4POOL_CIDR
               value: "10.25.0.0/16"
             - name: IP_AUTODETECTION_METHOD
-              value: "interface=ens33"
+              value: "interface=ens33|eth0"
             # Disable file logging so `kubectl logs` works.
             - name: CALICO_DISABLE_FILE_LOGGING
               value: "true"
