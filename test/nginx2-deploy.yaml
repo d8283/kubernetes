@@ -16,16 +16,16 @@ spec:
     spec:
       containers:
       - name: nginx2-con
-        image: registry.daoxila.com/d8283/nginx:v1.0
+        image: registry.cn-hangzhou.aliyuncs.com/d8283/nginx:v1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        volumeMounts:
-        - name: rootdir
-          mountPath: /usr/local/server/nginx/html
+#        volumeMounts:
+#        - name: rootdir
+#          mountPath: /usr/local/server/nginx/html
       imagePullSecrets:
       - name: registry-harbor
-      volumes:
-      - name: rootdir
-        persistentVolumeClaim:
-          claimName: nfs-pvc
+#      volumes:
+#      - name: rootdir
+#        persistentVolumeClaim:
+#          claimName: nfs-pvc
