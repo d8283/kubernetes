@@ -14,6 +14,8 @@ spec:
       labels:
         app: nginx2-test
     spec:
+#      nodeSelector:
+#        role: node2
       containers:
       - name: nginx2-con
         image: registry.cn-hangzhou.aliyuncs.com/d8283/nginx:v1.0

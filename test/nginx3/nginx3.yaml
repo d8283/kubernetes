@@ -14,6 +14,8 @@ spec:
       labels:
         app: nginx3-test
     spec:
+#      nodeSelector:
+#        role: master
       containers:
       - name: nginx3-con
         image: registry.cn-hangzhou.aliyuncs.com/d8283/nginx:v1.0
