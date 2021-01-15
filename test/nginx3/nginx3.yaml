@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx3-test
+  labels:
+    app: nginx3-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx3-test
+  template:
+    metadata:
+      labels:
+        app: nginx3-test
+    spec:
+      containers:
+      - name: nginx3-con
+        image: registry.cn-hangzhou.aliyuncs.com/d8283/nginx:v1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+#        volumeMounts:
+#        - name: rootdir
+#          mountPath: /usr/local/server/nginx/html
+      imagePullSecrets:
+      - name: registry-harbor
+#      volumes:
+#      - name: rootdir
+#        persistentVolumeClaim:
+#          claimName: nfs-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx3-test
+  labels:
+    app: nginx3-test
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: nginx3-test
