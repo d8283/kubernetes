@@ -64,7 +64,7 @@ data:
     .:53 {
         errors
         health
-        kubernetes cluster.local 172.31.0.0/16 {
+        kubernetes cluster.local 172.23.0.0/16 {
             pods insecure
             upstream
             fallthrough in-addr.arpa ip6.arpa
@@ -192,7 +192,7 @@ metadata:
 spec:
   selector:
     k8s-app: kube-dns
-  clusterIP: 172.31.0.2
+  clusterIP: 172.23.0.2
   ports:
   - name: dns
     port: 53
