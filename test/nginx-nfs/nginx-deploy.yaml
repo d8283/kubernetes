@@ -14,9 +14,9 @@ spec:
       labels:
         app: nginx-test
     spec:
-      containers:
 #      nodeSelector:
 #        role: node1
+      containers:
       - name: nginx-con
         image: registry.cn-hangzhou.aliyuncs.com/d8283/nginx:v1.0
         imagePullPolicy: IfNotPresent
