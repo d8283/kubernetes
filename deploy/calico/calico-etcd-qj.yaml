@@ -17,9 +17,9 @@ data:
   # etcd-key: null
   # etcd-cert: null
   # etcd-ca: null
-  etcd-key: ETCD-KEY
-  etcd-cert: ETCD-CERT
-  etcd-ca: ETCD-CA
+  etcd-key: ETCDKEY
+  etcd-cert: ETCDCERT
+  etcd-ca: ETCDCA
 
 ---
 # Source: calico/templates/calico-config.yaml
