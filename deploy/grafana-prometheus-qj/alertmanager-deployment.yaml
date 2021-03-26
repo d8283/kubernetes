@@ -74,5 +74,5 @@ spec:
           configMap:
             name: alertmanager-config
         - name: storage-volume
-          persistentVolumeClaim:
-            claimName: alertmanager
+          hostPath:
+            path: /data/xingyun/pub/data/alertmanager

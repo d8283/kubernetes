@@ -26,7 +26,7 @@ spec:
       serviceAccountName: kube-state-metrics
       containers:
       - name: kube-state-metrics
-        image: registry.cn-hangzhou.aliyuncs/d8283/kube-state-metrics:v1.3.0
+        image: registry.cn-hangzhou.aliyuncs.com/d8283/kube-state-metrics:v1.3.0
         ports:
         - name: http-metrics
           containerPort: 8080

@@ -99,13 +99,6 @@ spec:
         - name: config-volume
           configMap:
             name: prometheus-config
-  volumeClaimTemplates:
-  - metadata:
-      name: prometheus-data
-    spec:
-      storageClassName: standard
-      accessModes:
-        - ReadWriteOnce
-      resources:
-        requests:
-          storage: "5Gi"
+        - name: prometheus-data
+          hostPath:
+            path: /pub/data/prometheus

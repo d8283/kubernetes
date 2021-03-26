@@ -49,5 +49,5 @@ spec:
           mountPath: /var
       volumes:
       - name: grafana-persistent-storage
-        persistentVolumeClaim:
-          claimName: nfs-grafana-pvc
+        hostPath:
+          path: /data/xingyun/pub/data/grafana
