@@ -101,4 +101,4 @@ spec:
             name: prometheus-config
         - name: prometheus-data
           hostPath:
-            path: /pub/data/prometheus
+            path: /data/xingyun/pub/data/prometheus
