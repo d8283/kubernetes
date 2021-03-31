@@ -1,1 +1,1 @@
-#本例采用hostpath模式为持久存储，其中prometheus映射到宿主机本地磁盘，alertmanager和grafana是映射到NAS（data目录是挂载的nas目录）
+#本例的持久化存储采用的是hostpath模式，把Prometheus/alertmanager和grafana的数据映射到NAS（data目录是挂载的nas目录）,其中prometheus也可以映射到宿主机本地磁盘以提高数据读写IO性能。
