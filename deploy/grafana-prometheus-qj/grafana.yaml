@@ -18,10 +18,9 @@ spec:
     spec:
       securityContext:
         runAsUser: 0
-        fsGroup: 0
       containers:
         - name: grafana
-          image: grafana/grafana:7.1.5
+          image: registry.cn-shanghai.aliyuncs.com/xingyun/grafana
           imagePullPolicy: Always
           env:
             - name: GF_AUTH_BASIC_ENABLED
@@ -33,15 +32,15 @@ spec:
               path: /login
               port: 3000
           volumeMounts:
-            - mountPath: /var/lib/grafana
-              name: grafana-data-volume
+            - mountPath: /usr/local/grafana-7.1.5/data
+              name: grafana-data
           ports:
             - containerPort: 3000
               protocol: TCP
       volumes:
-        - name: grafana-data-volume
+        - name: grafana-data
           hostPath:
-            path: /data/xingyun/pub/data/grafana
+            path: /data/xingyun/pub/storage/grafana
           #emptyDir: {}
 ---
 kind: Service
@@ -55,6 +54,7 @@ spec:
   ports:
     - port: 3000
       targetPort: 3000
+      protocol: TCP
   selector:
     app: grafana
-  type: NodePort
+  #type: NodePort

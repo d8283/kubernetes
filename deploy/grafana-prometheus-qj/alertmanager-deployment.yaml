@@ -75,4 +75,4 @@ spec:
             name: alertmanager-config
         - name: storage-volume
           hostPath:
-            path: /data/xingyun/pub/data/alertmanager
+            path: /data/xingyun/pub/storage/alertmanager
