@@ -12,3 +12,5 @@
 #②Kubernetes Deployment Statefulset Daemonset metrics（8588）Pod资源监控
 
 #③Kubernetes cluster monitoring（315）微服务资源负载排行
+
+#3个模板json文件在file目录
